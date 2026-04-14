@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using PharmacySystem.Data;
@@ -17,9 +18,13 @@ namespace PharmacySystem
 
             // DB
             builder.Services.AddDbContext<PharmacyContext>(options =>
-                options.UseSqlServer(
-                    builder.Configuration.GetConnectionString("PharmacySystem"))
-            );
+        options.UseMySql(
+         builder.Configuration.GetConnectionString("DefaultConnection"),
+         ServerVersion.AutoDetect(
+             builder.Configuration.GetConnectionString("DefaultConnection")
+         )
+     )
+ );
 
             // JWT Authentication
             builder.Services.AddAuthentication("Bearer")
