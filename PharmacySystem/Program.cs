@@ -87,9 +87,12 @@ namespace PharmacySystem
             {
                 options.AddPolicy("AllowAngular", policy =>
                 {
-                    policy.WithOrigins("http://localhost:4200")
-                          .AllowAnyHeader()
-                          .AllowAnyMethod();
+                    policy.WithOrigins(
+                        "http://localhost:4200",
+                        "https://animated-jelly-ad0b45.netlify.app"
+                    )
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
                 });
             });
 
