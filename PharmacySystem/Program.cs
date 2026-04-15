@@ -83,18 +83,16 @@ namespace PharmacySystem
             });
 
             // CORS
-            // CORS
             builder.Services.AddCors(options =>
             {
-                options.AddPolicy("AllowAngular", policy =>
+                options.AddPolicy("AllowFrontend", policy =>
                 {
                     policy.WithOrigins(
                             "http://localhost:4200",
                             "https://animated-jelly-ad0b45.netlify.app"
                         )
                         .AllowAnyHeader()
-                        .AllowAnyMethod()
-                        .SetIsOriginAllowed(origin => true);
+                        .AllowAnyMethod();
                 });
             });
 
@@ -105,8 +103,8 @@ namespace PharmacySystem
 
             app.UseHttpsRedirection();
 
-            app.UseCors("AllowAngular");
-            
+            app.UseCors("AllowFrontend");
+
             app.UseAuthentication();
             app.UseAuthorization();
 
